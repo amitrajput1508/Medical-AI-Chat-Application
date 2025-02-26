@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical AI Chat</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+</head>
+<body>
+    <div id="welcome-message">👋 Hello! How can I help you today? 💡</div>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>
+    </div>
+    <div class="sidebar">
+        <h1><i class="fas fa-stethoscope icon"></i>Medical AI Chat</h1>
+        <button class="chat-history" onclick="startNewChat()">➕ New Chat</button>
+        <div class="chat-history" onclick="toggleChatHistory()">Chat History</div>
+        <div class="chat-dropdown" id="chat-dropdown">
+            <div id="chat-history-container"></div>
+        </div>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">CureBot</div> <!-- Added header for CureBot -->
+        <div class="chat-box" id="chat-box"></div>
+
+        <!-- Follow-up Questions Section -->
+        <div id="followup-container" class="followup-container" style="display: none;">
+            <h3>Follow-up Questions</h3>
+            <ul id="followup-list" class="followup-list"></ul>
+            <button class="followup-submit" onclick="submitFollowupAnswers()">Submit Answers</button>
+            <div id="loading" class="loading">🔍 Analyzing...</div>
+<div id="responseContainer" class="response-container" style="display: none;"></div>
+<button id="download-report-btn" style="display: none;">Download Report</button>
+
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="query" placeholder="Ask a medical question..." onfocus="removeWelcomeMessage()">
+            <button class="mic-btn" onclick="askQuery()"><i class="fa-solid fa-paper-plane"></i></button>
+            <button class="mic-btn" onclick="stopResponse()"><i class="fa-solid fa-circle-stop"></i></button>
+            <button class="mic-btn" onclick="startSpeechRecognition()"><i class="fa-solid fa-microphone"></i></button>
+            <button class="mic-btn" onclick="openCamera()"><i class="fa-solid fa-camera"></i></button> <!-- Added Camera Button -->
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to JavaScript -->
+</body>
+</html>
