@@ -1,18 +1,22 @@
 import re
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
-app = Flask(__name__)  # Correct Flask app initialization
+app = Flask(__name__)
 CORS(app)
 
 # Your API Key (consider using an environment variable for security)
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 modelR1 = "deepseek/deepseek-r1:free"
 modelV1 = "deepseek/deepseek-chat:free"
 model7B = "mistralai/mistral-7b-instruct:free"
 model70B = "deepseek/deepseek-r1-distill-llama-70b:free"
+
+@app.route('/')
+def index():
+    return send_file("index.html")
 
 def checkCondition(query, model):
     try:
@@ -24,12 +28,11 @@ def checkCondition(query, model):
             },
             json={
                 "model": model,
-                "messages": [{"role": "user", "content": f"Query: {query}.\nIs this query related to the medical field or not? Answer in one word."}]
+                "messages": [{"role": "user", "content": f"Query: {query}. Is this query related to the medical field or not? Answer in one word."}]
             },
         )
         response_json = response.json()
         return response_json["choices"][0]["message"]["content"].strip().lower()
-    
     except Exception as e:
         print(f"Error in checkCondition: {e}")
         return "error"
@@ -121,5 +124,5 @@ def answer():
 
     return jsonify({"final_solution": final_solution})
 
-if __name__ == '__main__':  # Correct __name__ check
+if __name__ == '__main__':
     app.run(debug=True, port=5001)
