@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Your API Key (consider using an environment variable for security)
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 modelR1 = "deepseek/deepseek-r1:free"
 modelV1 = "deepseek/deepseek-chat:free"
